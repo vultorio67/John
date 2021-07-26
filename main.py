@@ -1,4 +1,3 @@
-#ok
 import wave
 import gtts
 import pyttsx3
@@ -6,6 +5,8 @@ import speech_recognition as sr
 
 import createUserProfile
 import getFaceName
+
+#this is the main file
 
 engine = pyttsx3.init()
 
