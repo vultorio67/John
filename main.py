@@ -57,7 +57,6 @@ if userName == "opencv0":
 
 def speakingModule():
     speak("I am on your disposition")
-
     while True:
         text = get_audio()
 
