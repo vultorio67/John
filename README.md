@@ -20,4 +20,4 @@ But somtimes the installation of dlib issues to problem, so you can't install fa
   
 Now you are normally able to lauche john.
   
-The command to start john is <python main.py> if you use anaconda and if you use simple python it is <py main.py>
+The command to start john is < python main.py > if you use anaconda and if you use simple python it is < py main.py >
