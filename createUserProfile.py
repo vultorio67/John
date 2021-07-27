@@ -107,8 +107,15 @@ def getProfile():
         json.dump(str({"name": name, "age": age, "country": contry, "job": job}), file)
 
 # fonction to read json user data
-def read_info(what, self):
+def readInfoUser(what, self):
     with open("userData/" + self.name + ".json", 'r') as file:
+        uInfo = json.load(file)
+        uInfo = literal_eval(uInfo)
+        uInfo = uInfo[what]
+        return uInfo
+
+def readLanguage(what, self):
+    with open("wordDataBase.json", 'r') as file:
         uInfo = json.load(file)
         uInfo = literal_eval(uInfo)
         uInfo = uInfo[what]

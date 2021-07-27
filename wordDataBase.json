@@ -1,0 +1,24 @@
+{
+  "helloWord":
+  {
+    "1": "hello",
+    "2": "Hi",
+    "3": "good morning",
+    "4": "Bonjour"
+  },
+  "byeWord":
+  {
+    "1": "bye",
+    "2": "see you",
+    "3": "tchao"
+  },
+  "courtoie":
+  {
+    "1": "please",
+    "2": "thank you"
+  },
+  "PP":
+  {
+    
+  }
+}

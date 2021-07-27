@@ -8,6 +8,10 @@ import getFaceName
 
 #this is the main file
 
+test = "test"
+
+print(createUserProfile.readLanguage("helloWord", self=test))
+
 engine = pyttsx3.init()
 
 for voice in engine.getProperty('voices'):
@@ -47,6 +51,5 @@ text = get_audio()
 def speakingModule():
 
     if "hello" in text:
-        speak("hello, i know you"+userName)
-    elif "what is your name" in text:
-        speak("My name is Tim")
+        speak(createUserProfile.readLanguage("helloWord", self=userName)+userName)
+
