@@ -2,15 +2,21 @@ import wave
 import gtts
 import pyttsx3
 import speech_recognition as sr
+import json
+from ast import literal_eval
 
 import createUserProfile
 import getFaceName
+import ReadWordDataBase as rwdb
 
 #this is the main file
 
 test = "test"
 
-print(createUserProfile.readLanguage("helloWord", self=test))
+test = str(rwdb.getWord1('byeWord', 3, True))
+
+
+#rint(createUserProfile.readLanguage("helloWord", self=test))
 
 engine = pyttsx3.init()
 
@@ -28,6 +34,8 @@ def speak(text):
     engine = pyttsx3.init()
     engine.say(text)
     engine.runAndWait()
+
+
 def get_audio():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -46,10 +54,17 @@ def get_audio():
 if userName == "opencv0":
     print("Your profile is not know bye the system so I start getFaceName")
     createUserProfile.getProfile()
-text = get_audio()
 
 def speakingModule():
+    speak("I am on your disposition")
 
-    if "hello" in text:
-        speak(createUserProfile.readLanguage("helloWord", self=userName)+userName)
+    while True:
+        text = get_audio()
 
+        if "hello" in text:
+            speak(str(rwdb.getWord1('helloWord', 4, True))+userName+"How can I help you")
+        if "bye" in text:
+            speak(str(rwdb.getWord1('byeWord', 3, True))+userName)
+            break
+
+speakingModule()

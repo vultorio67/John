@@ -113,10 +113,3 @@ def readInfoUser(what, self):
         uInfo = literal_eval(uInfo)
         uInfo = uInfo[what]
         return uInfo
-
-def readLanguage(what, self):
-    with open("wordDataBase.json", 'r') as file:
-        uInfo = json.load(file)
-        uInfo = literal_eval(uInfo)
-        uInfo = uInfo[what]
-        return uInfo
