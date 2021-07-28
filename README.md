@@ -15,9 +15,9 @@ But somtimes the installation of dlib issues to problem, so you can't install fa
 2) Open anaconda prompt and create new environment <conda create --name YOURNAME python=PYTHON_VERSION> and activate it < conda activate YOURNAME>
 3) Verify that you have install cmake and visual studio c++ dev
   cmake : https://cmake.org/download/
-  visual studio c++ dev : https://visualstudio.microsoft.com/fr/
-4) Install library, to do that cd the anaconda command prompt to install folder < cd INSTALL_FOLDER > and type < pip install -r requirements.txt > 
-5) Open anaconda navigator and go to your environment name, select ALL and search dlib and pyaudio and install it.
+  visual studio c++ dev : https://visualstudio.microsoft.com/fr/4
+4) Open anaconda navigator and go to your environment name, select ALL and search dlib and pyaudio and install it.
+5) Install library, to do that cd the anaconda command prompt to install folder < cd INSTALL_FOLDER > and type < pip install -r requirements.txt > 
 6) Type in command prompt pip install face_recognition
   
 Now you are normally able to lauche john.
