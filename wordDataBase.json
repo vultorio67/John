@@ -17,37 +17,22 @@
     "1": "please",
     "2": "thank you"
   },
-  "PP":
+  "startSentence":
   {
-    "1": "I",
-    "2": "you",
-    "3": "he",
-    "4": "she",
-    "5": "it",
-    "6": "we",
-    "7": "they"
-  },
-  "verbe":
-  {
-    "have":
-    {
-      "1": "have",
-      "2": "have",
-      "3": "has",
-      "4": "has",
-      "5": "has",
-      "6": "have",
-      "7": "have"
-    },
-    "be":
-    {
-      "1": "am",
-      "2": "are",
-      "3": "is",
-      "4": "is",
-      "5": "is",
-      "6": "are",
-      "7": "are"
-    }
+    "1": "otherwise how are you ",
+    "2": "so what are you doing now ",
+    "3": "are you married ?",
+    "4": "When is your birthday?",
+    "5": "Who do you live with?",
+    "6": "Do you like vegetable, because me I can't eat ?",
+    "7": "What’s your hobby?",
+    "8": "What’s your favorite food?",
+    "9": "Did you like the movie?",
+    "10": "How many language you speak",
+    "11": "What’s on your mind ?",
+    "12": "What are you going to do tomorrow?",
+    "13": "What sports can you play?",
+    "14": "Are you hungry?",
+    "15": "Do you need help?"
   }
 }

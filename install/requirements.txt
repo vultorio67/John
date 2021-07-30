@@ -1,0 +1,7 @@
+opencv-python
+cmake
+speech_recognition
+numpy
+gtts
+pyttsx3
+face_recognition

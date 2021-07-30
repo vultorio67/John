@@ -4,6 +4,7 @@ import pyttsx3
 import speech_recognition as sr
 import json
 from ast import literal_eval
+import random
 
 import createUserProfile
 import getFaceName
@@ -39,16 +40,36 @@ def speak(text):
 def get_audio():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        audio = r.listen(source)
-        said = ""
-
         try:
-            said = r.recognize_google(audio)
-            print(said)
-        except Exception as e:
-            print("Exception: " + str(e))
+            audio = r.listen(source, timeout=1)
+            said = ""
 
-    return said.lower()
+            try:
+                said = r.recognize_google(audio)
+                print(said)
+                return said.lower()
+            except Exception as e:
+                print("Exception: " + str(e))
+        except :
+            print("You don't have speak or I don't hear")
+
+def getAudioMaybe():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        try:
+            audio = r.listen(source, timeout=1)
+            said = ""
+
+            try:
+                said = r.recognize_google(audio)
+                print(said)
+                return said.lower()
+            except Exception as e:
+                print("Exception: " + str(e))
+        except :
+            print("You don't have speak or I don't hear")
+
+
 
 
 if userName == "opencv0":
@@ -56,13 +77,17 @@ if userName == "opencv0":
     createUserProfile.getProfile()
 
 def speakingModule():
-    speak("I am on your disposition")
+
+    speak("hello")
+    print(rwdb.startSentences(rwdb.getNumber('wordDataBase.json')))
+
+
     while True:
         text = get_audio()
 
-        if "hello" in text:
+        if "hello" in text or "good morning" in text:
             speak(str(rwdb.getWord1('helloWord', 4, True))+userName+"How can I help you")
-        if "bye" in text:
+        if "bye" in text or "see you" in text:
             speak(str(rwdb.getWord1('byeWord', 3, True))+userName)
             break
 

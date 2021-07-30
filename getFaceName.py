@@ -4,107 +4,120 @@ import cv2
 import face_recognition
 import numpy as np
 from time import sleep
+import pyttsx3
 
 isStop = False
 
 
 def getName():
-    print("bala")
 
-    def get_encoded_faces():
-        """
-        looks through the faces folder and encodes all
-        the faces
+    try:
+        print("bala")
 
-        :return: dict of (name, image encoded)
-        """
-        encoded = {}
+        def get_encoded_faces():
+            """
+            looks through the faces folder and encodes all
+            the faces
 
-        for dirpath, dnames, fnames in os.walk("./faces"):
-            for f in fnames:
-                if f.endswith(".jpg") or f.endswith(".png"):
-                    face = fr.load_image_file("faces/" + f)
-                    encoding = fr.face_encodings(face)[0]
-                    encoded[f.split(".")[0]] = encoding
+            :return: dict of (name, image encoded)
+            """
+            encoded = {}
 
-        return encoded
+            for dirpath, dnames, fnames in os.walk("./faces"):
+                for f in fnames:
+                    if f.endswith(".jpg") or f.endswith(".png"):
+                        face = fr.load_image_file("faces/" + f)
+                        encoding = fr.face_encodings(face)[0]
+                        encoded[f.split(".")[0]] = encoding
+
+            return encoded
 
 
-    def unknown_image_encoded(img):
-        """
-        encode a face given the file name
-        """
-        face = fr.load_image_file("faces/" + img)
-        encoding = fr.face_encodings(face)[0]
+        def unknown_image_encoded(img):
+            """
+            encode a face given the file name
+            """
+            face = fr.load_image_file("faces/" + img)
+            encoding = fr.face_encodings(face)[0]
 
-        return encoding
+            return encoding
 
-    cap = cv2.VideoCapture(0)
-
-    while True:
         cap = cv2.VideoCapture(0)
-        _, img = cap.read()
 
-        """
-        will find all of the faces in a given image and label
-        them if it knows what they are
-        
-        :param im: str of file path
-        :return: list of face names
-        """
-        faces = get_encoded_faces()
-        faces_encoded = list(faces.values())
-        known_face_names = list(faces.keys())
+        while True:
+            cap = cv2.VideoCapture(0)
+            _, img = cap.read()
 
-        # img = cv2.resize(img, (0, 0), fx=0.5, fy=0.5)
-        # img = img[:,:,::-1]
+            """
+            will find all of the faces in a given image and label
+            them if it knows what they are
+            
+            :param im: str of file path
+            :return: list of face names
+            """
+            faces = get_encoded_faces()
+            faces_encoded = list(faces.values())
+            known_face_names = list(faces.keys())
 
-        face_locations = face_recognition.face_locations(img)
-        unknown_face_encodings = face_recognition.face_encodings(img, face_locations)
+            # img = cv2.resize(img, (0, 0), fx=0.5, fy=0.5)
+            # img = img[:,:,::-1]
 
-        face_names = []
-        for face_encoding in unknown_face_encodings:
-        # See if the face is a match for the known face(s)
-            matches = face_recognition.compare_faces(faces_encoded, face_encoding)
-            name = "Unknown"
+            face_locations = face_recognition.face_locations(img)
+            unknown_face_encodings = face_recognition.face_encodings(img, face_locations)
 
-            # use the known face with the smallest distance to the new face
-            face_distances = face_recognition.face_distance(faces_encoded, face_encoding)
-            best_match_index = np.argmin(face_distances)
-            if matches[best_match_index]:
-                name = known_face_names[best_match_index]
+            face_names = []
+            for face_encoding in unknown_face_encodings:
+            # See if the face is a match for the known face(s)
+                matches = face_recognition.compare_faces(faces_encoded, face_encoding)
+                name = "Unknown"
 
-            face_names.append(name)
+                # use the known face with the smallest distance to the new face
+                face_distances = face_recognition.face_distance(faces_encoded, face_encoding)
+                best_match_index = np.argmin(face_distances)
+                if matches[best_match_index]:
+                    name = known_face_names[best_match_index]
 
-            if name == "Unknown":
-                for i in range(1):
-                    return_value, image = cap.read()
-                    cv2.imwrite('faces/opencv' + str(i) + '.png', image)
-                del (cap)
-                isStop = True
-            else:
-                return name
+                face_names.append(name)
+
+                if name == "Unknown":
+                    for i in range(1):
+                        return_value, image = cap.read()
+                        cv2.imwrite('faces/opencv' + str(i) + '.png', image)
+                    del (cap)
+                    isStop = True
+                else:
+                    return name
+                    break
+
+
+            for (top, right, bottom, left), name in zip(face_locations, face_names):
+                # Draw a box around the face
+                cv2.rectangle(img, (left - 20, top - 20), (right + 20, bottom + 20), (255, 0, 0), 2)
+
+                # Draw a label with a name below the face
+                cv2.rectangle(img, (left - 20, bottom - 15), (right + 20, bottom + 20), (255, 0, 0), cv2.FILLED)
+                font = cv2.FONT_HERSHEY_DUPLEX
+                cv2.putText(img, name, (left - 20, bottom + 15), font, 1.0, (255, 255, 255), 2)
+
+            #cv2.imshow('img', img)
+
+
+            if isStop == True:
+                print("stop")
+                #break
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                print('arret')
                 break
 
+        cap.release()
+    except:
+        print("can't find face")
+        def speak(text):
+            engine = pyttsx3.init()
+            engine.say(text)
+            engine.runAndWait()
+        speak("what is your name, I can't see you face")
+        name = input("what is your name, I can't see you face : ")
+        return name
 
-        for (top, right, bottom, left), name in zip(face_locations, face_names):
-            # Draw a box around the face
-            cv2.rectangle(img, (left - 20, top - 20), (right + 20, bottom + 20), (255, 0, 0), 2)
-
-            # Draw a label with a name below the face
-            cv2.rectangle(img, (left - 20, bottom - 15), (right + 20, bottom + 20), (255, 0, 0), cv2.FILLED)
-            font = cv2.FONT_HERSHEY_DUPLEX
-            cv2.putText(img, name, (left - 20, bottom + 15), font, 1.0, (255, 255, 255), 2)
-
-        #cv2.imshow('img', img)
-
-
-        if isStop == True:
-            print("stop")
-            #break
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            print('arret')
-            break
-
-    cap.release()
 
