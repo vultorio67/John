@@ -12,6 +12,11 @@ import ReadWordDataBase as rwdb
 
 #this is the main file
 
+def speak(text):
+    engine = pyttsx3.init()
+    engine.say(text)
+    engine.runAndWait()
+
 test = "test"
 
 test = str(rwdb.getWord1('byeWord', 3, True))
@@ -28,13 +33,10 @@ engine.setProperty('voice', voice.id)
 
 
 print("activation de la reconaissance faciale.")
+speak("facial recognition is activate")
 userName = getFaceName.getName()
 print("detection of "+userName)
-
-def speak(text):
-    engine = pyttsx3.init()
-    engine.say(text)
-    engine.runAndWait()
+speak("I'm detecte"+userName)
 
 
 def get_audio():

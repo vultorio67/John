@@ -1,27 +1,19 @@
-#txt = "apple#banana#cherry#orange"
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+import nltk
 
-#x = txt.split("#")
+nltk.download('stopwords')
+nltk.download('punkt')
 
-#print(type(x))
+text = 'In this tutorial, I\'m learning NLTK. It is an interesting platform.'
+text = text.replace(",", "")
+stop_words = set(stopwords.words('english'))
+words = word_tokenize(text)
 
-import json
-from ast import literal_eval
+new_sentence = []
 
-with open("evan.json", 'r') as file:
-    uInfo = json.load(file)
-    uInfo = literal_eval(uInfo)
-    name = uInfo['name']
-    age = uInfo['age']
-    country = uInfo['country']
-    job = uInfo['job']
-    print(uInfo)
+for word in words:
+    if word not in stop_words:
+        new_sentence.append(word)
 
-length = len(uInfo)
-
-print(length)
-
-for key in json.loads('evan.json'):
-    print(key)
-
-with open('evan.json', 'w') as file:
-    json.dump(str({"name": name, "age": age, "country": country, "job": job, "ok": "oka"}), file)
+print(new_sentence)
